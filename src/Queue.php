@@ -29,7 +29,7 @@ class Queue
      */
     public function getName(): string
     {
-        return $this->config->getQueue();
+        return strtoupper($this->config->getQueue());
     }
 
     /**
@@ -117,6 +117,6 @@ class Queue
      */
     private function buildQueueKey(): string
     {
-        return self::REDIS_KEY_PREFIX . ':' . $this->config->getQueue();
+        return self::REDIS_KEY_PREFIX . ':' . $this->getName();
     }
 }

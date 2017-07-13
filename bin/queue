@@ -10,12 +10,10 @@ use Silly\Application;
 use Simplon\Queue\Cli\WorkerCli;
 use Simplon\Queue\ConfigInterface;
 use Simplon\Queue\Queue;
-use Symfony\Component\Console\Output\OutputInterface;
 
 $app = new Application();
 
-$app->command('work config', function ($config, OutputInterface $output) {
-
+$app->command('work config', function ($config) {
     if (!class_exists($config))
     {
         throw new Exception('Could not load config: ' . $config);
@@ -28,3 +26,5 @@ $app->command('work config', function ($config, OutputInterface $output) {
 
     (new WorkerCli($queue))->run();
 });
+
+$app->run();

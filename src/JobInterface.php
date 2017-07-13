@@ -11,7 +11,7 @@ interface JobInterface extends DataInterface
 {
     /**
      * @param string $taskId
-     * @param null|DataInterface $context
+     * @param null|mixed $context
      */
-    public function run(string $taskId, ?DataInterface $context = null): void;
+    public function run(string $taskId, $context = null): void;
 }

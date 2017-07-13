@@ -21,7 +21,7 @@ interface ConfigInterface extends DataInterface
     public function getQueue(): string;
 
     /**
-     * @return null|ContextInterface
+     * @return mixed|null
      */
-    public function getContext(): ?ContextInterface;
+    public function getContext();
 }
