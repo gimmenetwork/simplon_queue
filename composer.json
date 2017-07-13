@@ -1,0 +1,34 @@
+{
+  "name": "simplon/queue",
+  "description": "Queue solution",
+  "homepage": "https://github.com/fightbulc/simplon_queue",
+  "type": "library",
+  "keywords": [
+    "queue",
+    "worker",
+    "jobs"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tino Ehrich",
+      "email": "tino@bigpun.me",
+      "role": "developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "simplon/redis": "^0.1",
+    "simplon/helper": "^1.0",
+    "fightbulc/moment": "^1.26",
+    "mnapoli/silly": "^1.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Simplon\\Queue\\": "src/"
+    }
+  },
+  "bin": [
+    "bin/queue"
+  ]
+}
