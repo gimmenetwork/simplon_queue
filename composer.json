@@ -1,6 +1,6 @@
 {
   "name": "simplon/queue",
-  "description": "Queue solution",
+  "description": "Object Queue Solution",
   "homepage": "https://github.com/fightbulc/simplon_queue",
   "type": "library",
   "keywords": [
