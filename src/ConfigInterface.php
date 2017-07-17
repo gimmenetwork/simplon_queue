@@ -2,13 +2,12 @@
 
 namespace Simplon\Queue;
 
-use Simplon\Helper\Interfaces\DataInterface;
 use Simplon\Redis\Redis;
 
 /**
  * @package Simplon\Queue
  */
-interface ConfigInterface extends DataInterface
+interface ConfigInterface
 {
     /**
      * @return Redis
