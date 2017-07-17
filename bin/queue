@@ -11,9 +11,7 @@ use Simplon\Queue\Cli\WorkerCli;
 use Simplon\Queue\ConfigInterface;
 use Simplon\Queue\Queue;
 
-$app = new Application();
-
-$app->command('work config', function ($config) {
+$callable = function ($config) {
     if (!class_exists($config))
     {
         throw new Exception('Could not load config: ' . $config);
@@ -25,6 +23,15 @@ $app->command('work config', function ($config) {
     $queue = new Queue($config);
 
     (new WorkerCli($queue))->run();
-});
+};
+
+$app = new Application();
+
+$app
+    ->command('work config', $callable)
+    ->descriptions('Start working through your queue entries', [
+        'config' => 'Namespaced path to your queue config',
+    ])
+;
 
 $app->run();
