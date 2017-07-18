@@ -46,7 +46,7 @@ class WorkerCli
                 $previousCallEmpty = false;
 
                 echo "[" . (new Moment('now'))->format() . "] - found task with ID... " . $task->getId() . "\n";
-                $this->queue->runJob($task);
+                $this->queue->runTask($task);
 
                 usleep(100000);
                 continue;

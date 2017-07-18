@@ -88,7 +88,7 @@ class Queue
      *
      * @return bool
      */
-    public function runJob(Task $task): bool
+    public function runTask(Task $task): bool
     {
         $className = $task->getJobFullyQualifiedClassName();
 
