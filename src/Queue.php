@@ -2,6 +2,7 @@
 
 namespace Simplon\Queue;
 
+use Simplon\Helper\SecurityUtil;
 use Simplon\Redis\Redis;
 
 /**
@@ -46,13 +47,21 @@ class Queue
     }
 
     /**
-     * @param Task $task
+     * @param JobInterface $job
      *
      * @return bool
      */
-    public function addTask(Task $task): bool
+    public function addJob(JobInterface $job): bool
     {
-        if ($this->getRedis()->listPush($this->buildQueueKey(), $task->toJSON()))
+        $taskData = [
+            'id'  => SecurityUtil::createRandomToken(22),
+            'job' => [
+                'class' => get_class($job),
+                'data'  => $job->toArray(),
+            ],
+        ];
+
+        if ($this->getRedis()->listPush($this->buildQueueKey(), json_encode($taskData)))
         {
             return true;
         }
@@ -67,17 +76,7 @@ class Queue
     {
         if ($json = $this->getRedis()->listShift($this->buildQueueKey()))
         {
-            $data = json_decode($json, true);
-
-            /** @var JobInterface $job */
-            $job = new $data['class'];
-
-            if (isset($data['data']))
-            {
-                $job->fromArray($data['data']);
-            }
-
-            return new Task($job, $data['id']);
+            return new Task(json_decode($json, true));
         }
 
         return null;
@@ -90,12 +89,12 @@ class Queue
      */
     public function runTask(Task $task): bool
     {
-        $className = $task->getJobFullyQualifiedClassName();
+        $className = $task->getJobClassNamespace();
 
         if (class_exists($className))
         {
             /** @var JobInterface $job */
-            $job = new $className($task->getData());
+            $job = new $className($task->getJobData());
             $job->run($task->getId(), $this->config->getContext());
 
             return true;

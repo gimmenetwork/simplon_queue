@@ -2,75 +2,43 @@
 
 namespace Simplon\Queue;
 
-use Simplon\Helper\SecurityUtil;
+use Simplon\Helper\Data\Data;
 
 /**
  * @package Simplon\Queue
  */
-class Task
+class Task extends Data
 {
     /**
      * @var string
      */
-    protected $jobFullyQualifiedClassName;
+    protected $id;
     /**
      * @var array
      */
-    protected $data;
-    /**
-     * @var string|null
-     */
-    private $id;
-
-    /**
-     * @param JobInterface $job
-     * @param string $id
-     */
-    public function __construct(JobInterface $job, ?string $id = null)
-    {
-        $this->jobFullyQualifiedClassName = get_class($job);
-        $this->data = $job->toArray();
-        $this->id = $id;
-    }
-
-    /**
-     * @return string
-     */
-    public function toJSON(): string
-    {
-        return json_encode([
-            'id'    => $this->getId(),
-            'class' => $this->getJobFullyQualifiedClassName(),
-            'data'  => $this->getData(),
-        ]);
-    }
+    protected $job;
 
     /**
      * @return string
      */
     public function getId(): string
     {
-        if (!$this->id)
-        {
-            $this->id = SecurityUtil::createRandomToken(22);
-        }
-
         return $this->id;
     }
 
     /**
      * @return string
      */
-    public function getJobFullyQualifiedClassName(): string
+    public function getJobClassNamespace(): string
     {
-        return $this->jobFullyQualifiedClassName;
+        return $this->job['class'];
     }
 
     /**
      * @return array
      */
-    public function getData(): array
+    public function getJobData(): array
     {
-        return $this->data;
+        return $this->job['data'];
     }
 }

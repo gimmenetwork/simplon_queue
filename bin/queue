@@ -30,7 +30,7 @@ $app = new Application();
 $app
     ->command('work config', $callable)
     ->descriptions('Start working through your queue entries', [
-        'config' => 'Namespaced path to your queue config',
+        'config' => 'Namespaced path to your queue config e.g. \'App\Queues\MainConfig\'',
     ])
 ;
 
