@@ -1,6 +1,6 @@
 {
-  "name": "simplon/queue",
-  "description": "Object Queue Solution",
+  "name": "gimmenetwork/simplon_queue",
+  "description": "[FORK] Object Queue Solution",
   "homepage": "https://github.com/fightbulc/simplon_queue",
   "type": "library",
   "keywords": [
