@@ -16,10 +16,19 @@
       "role": "developer"
     }
   ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/gimmenetwork/simplon_redis"
+    },{
+      "type": "vcs",
+      "url": "https://github.com/gimmenetwork/simplon_helper"
+    }
+  ],
   "require": {
     "php": ">=7.1",
-    "simplon/redis": "^0.1",
-    "simplon/helper": "^1.0",
+    "gimmenetwork/simplon_redis": "^0.1",
+    "gimmenetwork/simplon_helper": "^1.0",
     "fightbulc/moment": "^1.26",
     "mnapoli/silly": "^1.6"
   },
@@ -30,5 +39,8 @@
   },
   "bin": [
     "bin/queue"
-  ]
+  ],
+  "replace": {
+    "simplon/queue": "dev-master"
+  }
 }
